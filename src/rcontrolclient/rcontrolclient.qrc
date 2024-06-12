@@ -1,0 +1,35 @@
+<RCC>
+    <qresource prefix="/config">
+        <file>resources/rcontrolclient.base.conf</file>
+    </qresource>
+    <qresource prefix="/images">
+        <file>resources/connect_blue.svg</file>
+        <file>resources/connect_blue2.svg</file>
+        <file>resources/connect_gray.svg</file>
+        <file>resources/connect.svg</file>
+        <file>resources/exit_blue.svg</file>
+        <file>resources/exit_blue2.svg</file>
+        <file>resources/exit_gray.svg</file>
+        <file>resources/exit.svg</file>
+        <file>resources/settings_blue.svg</file>
+        <file>resources/settings_blue2.svg</file>
+        <file>resources/settings_gray.svg</file>
+        <file>resources/settings.svg</file>
+        <file>resources/gpu.png</file>
+    </qresource>
+    <qresource prefix="/worker">
+        <file>resources/worker/consumption.svg</file>
+        <file>resources/worker/cooler.svg</file>
+        <file>resources/worker/cpu.svg</file>
+        <file>resources/worker/linux.svg</file>
+        <file>resources/worker/refresh.svg</file>
+        <file>resources/worker/speed.svg</file>
+        <file>resources/worker/temperature.svg</file>
+        <file>resources/worker/bag.png</file>
+        <file>resources/worker/copy.svg</file>
+        <file>resources/worker/edit.svg</file>
+        <file>resources/worker/invalid.svg</file>
+        <file>resources/worker/minus.svg</file>
+        <file>resources/worker/plus.svg</file>
+    </qresource>
+</RCC>
