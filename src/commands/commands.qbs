@@ -30,7 +30,7 @@ Product {
     files: [
         "commands.cpp",
         "commands.h",
-        "error.h",
+//        "error.h",
     ]
     Export {
         Depends { name: "cpp" }

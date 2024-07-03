@@ -26,7 +26,7 @@
 #include "shared/config/appl_conf.h"
 #include "shared/qt/logger_operators.h"
 #include "commands/commands.h"
-#include "commands/error.h"
+//#include "commands/error.h"
 
 #include <QMainWindow>
 #include <QCloseEvent>

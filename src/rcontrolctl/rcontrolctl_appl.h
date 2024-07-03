@@ -14,7 +14,7 @@
 #include "shared/qt/logger_operators.h"
 #include "shared/qt/version_number.h"
 #include "commands/commands.h"
-#include "commands/error.h"
+//#include "commands/error.h"
 #include "pproto/func_invoker.h"
 #include "pproto/transport/tcp.h"
 #include "pproto/commands/base.h"

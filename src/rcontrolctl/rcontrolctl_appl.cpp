@@ -277,7 +277,12 @@ void Application::message(const pproto::Message::Ptr& message)
 
 void Application::socketConnected(pproto::SocketDescriptor socketDescript)
 {
-
+    base::Socket::Ptr sock = tcp::listener().socketByDescriptor(socketDescript);
+    if (sock->messageFormat() == SerializeFormat::Json)
+    {
+        sock->setMessageWebFlags(true);
+        return;
+    }
 }
 
 void Application::socketDisconnected(pproto::SocketDescriptor socketDescript)
@@ -664,6 +669,13 @@ void Application::command_UserLogin(const Message::Ptr& message)
         data::UserLogin userLogin;
         readFromMessage(message, userLogin);
 
+        if (message->contentFormat() == SerializeFormat::Json)
+        {
+            QJsonDocument jsonDoc(QJsonDocument::fromJson(message->content()));
+            userLogin.login = jsonDoc.object().take("login").toString();
+            userLogin.password = jsonDoc.object().take("password").toString();
+        }
+
         db::postgres::Driver::Ptr dbcon = pgpool().connect();
         db::postgres::Transaction::Ptr transact = dbcon->createTransact();
         QSqlQuery q {db::postgres::createResult(transact)};
@@ -705,7 +717,7 @@ void Application::command_UserLogin(const Message::Ptr& message)
         } // exec
 
         Message::Ptr answer = message->cloneForAnswer();
-        writeToMessage(userLogin, answer);
+        writeToMessage(userLogin, answer, message->contentFormat());
         tcp::listener().send(answer);
 
     };
@@ -721,6 +733,12 @@ void Application::command_UserWorkerList(const Message::Ptr& message)
 
         data::UserWorkerList workerList;
         readFromMessage(message, workerList);
+
+        if (message->contentFormat() == SerializeFormat::Json)
+        {
+            QJsonDocument jsonDoc(QJsonDocument::fromJson(message->content()));
+            workerList.userId = jsonDoc.object().take("id").toString();
+        }
 
         db::postgres::Driver::Ptr dbcon = pgpool().connect();
         db::postgres::Transaction::Ptr transact = dbcon->createTransact();
@@ -806,7 +824,7 @@ void Application::command_UserWorkerList(const Message::Ptr& message)
         }
 
         Message::Ptr answer = message->cloneForAnswer();
-        writeToMessage(workerList, answer);
+        writeToMessage(workerList, answer, message->contentFormat());
         tcp::listener().send(answer);
     };
 
@@ -822,6 +840,12 @@ void Application::command_AddWorker(const Message::Ptr& message)
 
         data::AddWorker addWorker;
         readFromMessage(message, addWorker);
+
+        if (message->contentFormat() == SerializeFormat::Json)
+        {
+            QJsonDocument jsonDoc(QJsonDocument::fromJson(message->content()));
+            addWorker.userId = jsonDoc.object().take("id").toString();
+        }
 
         Message::Ptr answer = message->cloneForAnswer();
 
@@ -901,7 +925,7 @@ void Application::command_AddWorker(const Message::Ptr& message)
             }
         }
 
-        writeToMessage(addWorker, answer);
+        writeToMessage(addWorker, answer, message->contentFormat());
         tcp::listener().send(answer);
     };
     std::thread t {tfunc};
@@ -916,6 +940,15 @@ void Application::command_DeleteWorker(const Message::Ptr& message)
 
         data::DeleteWorker deleteWorker;
         readFromMessage(message, deleteWorker);
+
+        if (message->contentFormat() == SerializeFormat::Json)
+        {
+            QJsonDocument jsonDoc(QJsonDocument::fromJson(message->content()));
+            deleteWorker.userId     = jsonDoc.object().take("userId"    ).toString();
+            deleteWorker.workerId   = jsonDoc.object().take("workerId"  ).toString();
+            deleteWorker.workerName = jsonDoc.object().take("workerName").toString();
+            deleteWorker.resault    = jsonDoc.object().take("resault"   ).toBool();
+        }
 
         Message::Ptr answer = message->cloneForAnswer();
 
@@ -943,7 +976,7 @@ void Application::command_DeleteWorker(const Message::Ptr& message)
             }
         }
 
-        writeToMessage(deleteWorker, answer);
+        writeToMessage(deleteWorker, answer, message->contentFormat());
         tcp::listener().send(answer);
     };
     std::thread t {tfunc};
@@ -1096,6 +1129,13 @@ void Application::command_AddUser(const Message::Ptr& message)
         data::AddUser addUser;
         readFromMessage(message, addUser);
 
+        if (message->contentFormat() == SerializeFormat::Json)
+        {
+            QJsonDocument jsonDoc(QJsonDocument::fromJson(message->content()));
+            addUser.login = jsonDoc.object().take("login").toString();
+            addUser.password = jsonDoc.object().take("password").toString();
+        }
+
         Message::Ptr answer = message->cloneForAnswer();
 
         db::postgres::Driver::Ptr dbcon = pgpool().connect();
@@ -1167,7 +1207,7 @@ void Application::command_AddUser(const Message::Ptr& message)
         }
 
         addUser.resault = true;
-        writeToMessage(addUser, answer);
+        writeToMessage(addUser, answer, message->contentFormat());
         tcp::listener().send(answer);
     };
     std::thread t {tfunc};
@@ -1181,6 +1221,15 @@ void Application::command_DeleteUser(const Message::Ptr& message)
         trd::ThreadIdLock threadIdLock(&_threadIds); (void) threadIdLock;
         data::DeleteUser deleteUser;
         readFromMessage(message, deleteUser);
+
+        if (message->contentFormat() == SerializeFormat::Json)
+        {
+            QJsonDocument jsonDoc(QJsonDocument::fromJson(message->content()));
+            deleteUser.userID   = jsonDoc.object().take("id"      ).toString();
+            deleteUser.login    = jsonDoc.object().take("login"   ).toString();
+            deleteUser.password = jsonDoc.object().take("password").toString();
+        }
+
         Message::Ptr answer = message->cloneForAnswer();
 
         db::postgres::Driver::Ptr dbcon = pgpool().connect();
@@ -1267,7 +1316,7 @@ void Application::command_DeleteUser(const Message::Ptr& message)
             } // if q1
         } // if login password
 
-        writeToMessage(deleteUser, answer);
+        writeToMessage(deleteUser, answer, message->contentFormat());
         tcp::listener().send(answer);
     };
     std::thread t {tfunc};
@@ -1281,6 +1330,14 @@ void Application::command_ChangeUserPassword(const Message::Ptr& message)
         trd::ThreadIdLock threadIdLock(&_threadIds); (void) threadIdLock;
         data::ChangeUserPassword changeUserPassword;
         readFromMessage(message, changeUserPassword);
+
+        if (message->contentFormat() == SerializeFormat::Json)
+        {
+            QJsonDocument jsonDoc(QJsonDocument::fromJson(message->content()));
+            changeUserPassword.userID   = jsonDoc.object().take("id"      ).toString();
+            changeUserPassword.login    = jsonDoc.object().take("login"   ).toString();
+            changeUserPassword.password = jsonDoc.object().take("password").toString();
+        }
 
         Message::Ptr answer = message->cloneForAnswer();
         db::postgres::Driver::Ptr dbcon = pgpool().connect();
@@ -1313,7 +1370,7 @@ void Application::command_ChangeUserPassword(const Message::Ptr& message)
 
         if (changeUserPassword.login != l && changeUserPassword.password != p)
         {
-            writeToMessage(changeUserPassword, answer);
+            writeToMessage(changeUserPassword, answer, message->contentFormat());
             tcp::listener().send(answer);
             return;
         }
@@ -1366,6 +1423,15 @@ void Application::command_UpdateWorkerInfoClient(const Message::Ptr& message)
         data::UpdateWorkerInfoClient update;
         readFromMessage(message, update);
 
+        if (message->contentFormat() == SerializeFormat::Json)
+        {
+            QJsonDocument jsonDoc(QJsonDocument::fromJson(message->content()));
+            update.workerID      = jsonDoc.object().take("workerId"     ).toString();
+            update.newWorkerName = jsonDoc.object().take("newWorkerName").toString();
+            update.oldName       = jsonDoc.object().take("oldName"      ).toString();
+            update.newPowerPrice = jsonDoc.object().take("newPowerPrice").toDouble();
+            update.resault       = jsonDoc.object().take("resault"      ).toBool();
+        }
         Message::Ptr answer = message->cloneForAnswer();
 
         // Обновить данные в БД
@@ -1401,7 +1467,7 @@ void Application::command_UpdateWorkerInfoClient(const Message::Ptr& message)
             }
 
         update.resault = true;
-        writeToMessage(update, answer);
+        writeToMessage(update, answer, message->contentFormat());
         tcp::listener().send(answer);
     };
     std::thread t {tfunc};

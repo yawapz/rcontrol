@@ -183,6 +183,44 @@ struct gpuData
     }
 
     DECLARE_B_SERIALIZE_FUNC
+
+    J_SERIALIZE_BEGIN
+        J_SERIALIZE_ITEM(id)
+        J_SERIALIZE_ITEM(setFanSpeed)
+        J_SERIALIZE_ITEM(setCore)
+        J_SERIALIZE_ITEM(setMem)
+        J_SERIALIZE_ITEM(setPl)
+        J_SERIALIZE_ITEM(name)
+        J_SERIALIZE_ITEM(busId)
+        J_SERIALIZE_ITEM(vendor)
+        J_SERIALIZE_ITEM(totalMemory)
+        J_SERIALIZE_ITEM(vbiosVersion)
+        J_SERIALIZE_ITEM(minPl)
+        J_SERIALIZE_ITEM(defaultPl)
+        J_SERIALIZE_ITEM(maxPl)
+        J_SERIALIZE_ITEM(gpuId)
+        J_SERIALIZE_ITEM(fanSpeed)
+        J_SERIALIZE_ITEM(coreClock)
+        J_SERIALIZE_ITEM(memoryClock)
+        J_SERIALIZE_ITEM(powerUsage)
+        J_SERIALIZE_ITEM(coreTemp)
+        J_SERIALIZE_ITEM(memoryTemp)
+        J_SERIALIZE_ITEM(speed1)
+        J_SERIALIZE_ITEM(speed2)
+        J_SERIALIZE_ITEM(speedZil)
+        J_SERIALIZE_ITEM(acceptedShares1)
+        J_SERIALIZE_ITEM(acceptedShares2)
+        J_SERIALIZE_ITEM(acceptedSharesZil)
+        J_SERIALIZE_ITEM(rejectedShares1)
+        J_SERIALIZE_ITEM(rejectedShares2)
+        J_SERIALIZE_ITEM(rejectedSharesZil)
+        J_SERIALIZE_ITEM(rejectedShares1)
+        J_SERIALIZE_ITEM(rejectedShares2)
+        J_SERIALIZE_ITEM(staleSharesZil)
+        J_SERIALIZE_ITEM(invalidShares1)
+        J_SERIALIZE_ITEM(invalidShares2)
+        J_SERIALIZE_ITEM(invalidSharesZil)
+    J_SERIALIZE_END
 };
 
 struct workerData
@@ -323,6 +361,56 @@ struct workerData
     }
 
     DECLARE_B_SERIALIZE_FUNC
+
+    J_SERIALIZE_BEGIN
+        J_SERIALIZE_ITEM(workerName)
+        J_SERIALIZE_ITEM(id)
+        J_SERIALIZE_ITEM(electricityCost)
+        J_SERIALIZE_ITEM(startup)
+        J_SERIALIZE_ITEM(version)
+        J_SERIALIZE_ITEM(devices)
+        J_SERIALIZE_ITEM(sysUptime)
+        J_SERIALIZE_ITEM(la1)
+        J_SERIALIZE_ITEM(la5)
+        J_SERIALIZE_ITEM(la15)
+        J_SERIALIZE_ITEM(kernelVersion)
+        J_SERIALIZE_ITEM(nvidiaVersion)
+        J_SERIALIZE_ITEM(amdVersion)
+        J_SERIALIZE_ITEM(motherboardInfo)
+        J_SERIALIZE_ITEM(cpuInfo)
+        J_SERIALIZE_ITEM(cpuTemp)
+        J_SERIALIZE_ITEM(diskModel)
+        J_SERIALIZE_ITEM(diskSize)
+        J_SERIALIZE_ITEM(diskFreeSpace)
+        J_SERIALIZE_ITEM(ramTotal)
+        J_SERIALIZE_ITEM(ramFree)
+        J_SERIALIZE_ITEM(mac)
+        J_SERIALIZE_ITEM(localIp)
+        J_SERIALIZE_ITEM(extIp)
+        J_SERIALIZE_ITEM(minerName)
+        J_SERIALIZE_ITEM(minerUptime)
+        J_SERIALIZE_ITEM(algorithm1)
+        J_SERIALIZE_ITEM(algorithm2)
+        J_SERIALIZE_ITEM(algorithmZil)
+        J_SERIALIZE_ITEM(server1)
+        J_SERIALIZE_ITEM(server2)
+        J_SERIALIZE_ITEM(serverZil)
+        J_SERIALIZE_ITEM(user1)
+        J_SERIALIZE_ITEM(user2)
+        J_SERIALIZE_ITEM(userZil)
+        J_SERIALIZE_ITEM(totalAcceptedShares1)
+        J_SERIALIZE_ITEM(totalAcceptedShares2)
+        J_SERIALIZE_ITEM(totalAcceptedSharesZil)
+        J_SERIALIZE_ITEM(totalInvalidShares1)
+        J_SERIALIZE_ITEM(totalInvalidShares2)
+        J_SERIALIZE_ITEM(totalInvalidSharesZil)
+        J_SERIALIZE_ITEM(totalRejectedShares1)
+        J_SERIALIZE_ITEM(totalRejectedShares2)
+        J_SERIALIZE_ITEM(totalRejectedSharesZil)
+        J_SERIALIZE_ITEM(totalStaleShares1)
+        J_SERIALIZE_ITEM(totalStaleShares2)
+        J_SERIALIZE_ITEM(totalStaleSharesZil)
+    J_SERIALIZE_END
 };
 
 struct CtlDiscovery : Data<&command::CtlDiscovery,
@@ -409,6 +497,13 @@ struct UserLogin : Data<&command::UserLogin,
     bool resault = {false};
 
     DECLARE_B_SERIALIZE_FUNC
+
+    J_SERIALIZE_BEGIN
+        J_SERIALIZE_ITEM(id)
+        J_SERIALIZE_ITEM(login)
+        J_SERIALIZE_ITEM(password)
+        J_SERIALIZE_ITEM(resault)
+    J_SERIALIZE_END
 };
 
 struct UserWorkerList : Data<&command::UserWorkerList,
@@ -426,6 +521,12 @@ struct UserWorkerList : Data<&command::UserWorkerList,
     QList<workerData> workersData;
 
     DECLARE_B_SERIALIZE_FUNC
+
+    J_SERIALIZE_BEGIN
+        J_SERIALIZE_ITEM(userId)
+        J_SERIALIZE_ITEM(userIdWorkers)
+        J_SERIALIZE_ITEM(workersData)
+    J_SERIALIZE_END
 };
 
 struct AddWorker : Data<&command::AddWorker,
@@ -439,6 +540,11 @@ struct AddWorker : Data<&command::AddWorker,
     }
     QUuidEx userId;
     bool resault = {false};
+
+    J_SERIALIZE_BEGIN
+        J_SERIALIZE_ITEM(userId)
+        J_SERIALIZE_ITEM(resault)
+    J_SERIALIZE_END
 
     DECLARE_B_SERIALIZE_FUNC
 };
@@ -460,6 +566,13 @@ struct DeleteWorker : Data<&command::DeleteWorker,
     bool resault = {false};
 
     DECLARE_B_SERIALIZE_FUNC
+
+    J_SERIALIZE_BEGIN
+        J_SERIALIZE_ITEM(userId)
+        J_SERIALIZE_ITEM(workerId)
+        J_SERIALIZE_ITEM(workerName)
+        J_SERIALIZE_ITEM(resault)
+    J_SERIALIZE_END
 };
 
 struct AddUser : Data<&command::AddUser,
@@ -479,6 +592,12 @@ struct AddUser : Data<&command::AddUser,
     bool resault = {false};
 
     DECLARE_B_SERIALIZE_FUNC
+
+    J_SERIALIZE_BEGIN
+        J_SERIALIZE_ITEM(login)
+        J_SERIALIZE_ITEM(password)
+        J_SERIALIZE_ITEM(resault)
+    J_SERIALIZE_END
 };
 
 struct DeleteUser : Data<&command::DeleteUser,
@@ -499,6 +618,13 @@ struct DeleteUser : Data<&command::DeleteUser,
     bool resault = {false};
 
     DECLARE_B_SERIALIZE_FUNC
+
+    J_SERIALIZE_BEGIN
+        J_SERIALIZE_ITEM(userID)
+        J_SERIALIZE_ITEM(login)
+        J_SERIALIZE_ITEM(password)
+        J_SERIALIZE_ITEM(resault)
+    J_SERIALIZE_END
 };
 
 struct ChangeUserPassword : Data<&command::ChangeUserPassword,
@@ -519,6 +645,13 @@ struct ChangeUserPassword : Data<&command::ChangeUserPassword,
     bool resault = {false};
 
     DECLARE_B_SERIALIZE_FUNC
+
+    J_SERIALIZE_BEGIN
+        J_SERIALIZE_ITEM(userID)
+        J_SERIALIZE_ITEM(login)
+        J_SERIALIZE_ITEM(password)
+        J_SERIALIZE_ITEM(resault)
+    J_SERIALIZE_END
 };
 
 struct UpdateWorkerInfoClient : Data<&command::UpdateWorkerInfoClient,
@@ -550,6 +683,14 @@ struct UpdateWorkerInfoClient : Data<&command::UpdateWorkerInfoClient,
     bool resault = {false};
 
     DECLARE_B_SERIALIZE_FUNC
+
+    J_SERIALIZE_BEGIN
+        J_SERIALIZE_ITEM(workerID)
+        J_SERIALIZE_ITEM(newWorkerName)
+        J_SERIALIZE_ITEM(oldName)
+        J_SERIALIZE_ITEM(newPowerPrice)
+        J_SERIALIZE_ITEM(resault)
+    J_SERIALIZE_END
 };
 
 struct UpdateWorkerInfoAgent : Data<&command::UpdateWorkerInfoAgent,

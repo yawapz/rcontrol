@@ -9,7 +9,7 @@
 #include "pproto/transport/tcp.h"
 
 #include "commands/commands.h"
-#include "commands/error.h"
+//#include "commands/error.h"
 
 #include <QtCore>
 #include <QCoreApplication>
