@@ -16,3 +16,6 @@
 [submodule "QbsExt"]
 	path = QbsExt
 	url = https://github.com/hkarel/QbsExt.git
+[submodule "proxy"]
+	path = proxy
+	url = git@github.com:yawapz/proxy.git
