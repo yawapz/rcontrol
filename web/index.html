@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="application/javascript">
+        const id = localStorage.getItem('id');
+        console.log(id)
+        if (id === null)
+            window.location.replace("./login.html");
+        else
+            window.location.replace("./main.html");
+    </script>
+</body>
+</html>
