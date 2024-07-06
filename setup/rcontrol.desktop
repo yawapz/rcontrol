@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Name=RcontrolClient
+GenericName=Rcontrol Client
+Comment=Rcontrol Client
+TryExec=/opt/rcontrol/bin/rcontrolclient
+Exec=/opt/rcontrol/bin/rcontrolclient
+Icon=gpu.png
+Terminal=false
+Categories=Application;Network;

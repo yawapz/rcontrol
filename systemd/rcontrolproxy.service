@@ -1,0 +1,17 @@
+[Unit]
+Description=GPU control system
+After=network.target multi-user.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+ExecStart=/var/opt/rcontrol/proxy/run-proxy
+WorkingDirectory=/var/opt/rcontrol/proxy
+TimeoutSec=300
+KillMode=process
+Restart=on-failure
+LimitCORE=infinity
+
+[Install]
+WantedBy=multi-user.target

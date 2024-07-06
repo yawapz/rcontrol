@@ -1,0 +1,16 @@
+[Unit]
+Description=GPU control system
+After=network.target multi-user.target
+
+[Service]
+Type=simple
+User=%TARGET_USER%
+Group=rcontrol
+ExecStart=/opt/rcontrol/bin/rcontrolctl
+TimeoutSec=300
+KillMode=process
+Restart=on-failure
+LimitCORE=infinity
+
+[Install]
+WantedBy=multi-user.target

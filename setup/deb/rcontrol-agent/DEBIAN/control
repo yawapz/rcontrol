@@ -1,0 +1,10 @@
+Package: rcontrol-agent
+Version: %VERSION%
+Architecture: %ARCHITECTURE%
+Maintainer: Iakov Gubin <yawapz@gmail.com>
+Installed-Size: %INSTALLED_SIZE%
+Depends: %DEPENDS%
+Section: net
+Priority: standard
+Homepage:
+Description: GPU control system

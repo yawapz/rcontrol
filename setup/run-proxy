@@ -1,0 +1,13 @@
+#!/bin/bash
+
+path="/var/opt/rcontrol/proxy/proxy.js"
+pattern="PROXY_PORT"
+port=$(cat $path | grep PROXY_PORT | head -n 1 | sed 's/[^0-9]//g')
+
+pid=$(lsof -i -P -sTCP:LISTEN | grep $port | awk '{printf $2}')
+
+if ! [[ -z $pid ]]; then
+    kill -9 $pid
+fi
+
+npm run start

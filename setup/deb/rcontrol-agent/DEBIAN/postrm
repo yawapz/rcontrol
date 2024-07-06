@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set +e
+
+product_dir=rcontrol
+
+systemctl daemon-reload
+
+exit 0

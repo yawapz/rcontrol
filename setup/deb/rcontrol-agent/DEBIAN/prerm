@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set +e
+
+service_name=rcontrolagent
+
+res=$(systemctl list-unit-files | grep "$service_name")
+if [ -n "$res" ]; then
+    systemctl stop    ${service_name}.service
+    systemctl disable ${service_name}.service
+fi
+
+exit 0

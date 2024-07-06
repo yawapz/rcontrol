@@ -1,0 +1,22 @@
+#!/bin/bash
+
+set +e
+
+service_name=rcontrolctl
+proxy_service_name=rcontrolproxy
+
+systemctl daemon-reload
+
+res=$(systemctl list-unit-files | grep "$service_name")
+if [ -n "$res" ]; then
+    systemctl stop    ${service_name}.service
+    systemctl disable ${service_name}.service
+fi
+
+res=$(systemctl list-unit-files | grep "$proxy_service_name")
+if [ -n "$res" ]; then
+    systemctl stop    ${proxy_service_name}.service
+    systemctl disable ${proxy_service_name}.service
+fi
+
+exit 0
