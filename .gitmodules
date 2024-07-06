@@ -19,3 +19,6 @@
 [submodule "proxy"]
 	path = proxy
 	url = git@github.com:yawapz/proxy.git
+[submodule "setup/scripts"]
+	path = setup/scripts
+	url = https://github.com/hkarel/InstallScripts.git

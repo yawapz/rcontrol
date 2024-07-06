@@ -26,6 +26,8 @@ bool GPUItem::init(const data::gpuData& gpu, tcp::Socket::Ptr socket)
     _socket = socket;
 
     renderData(NEW);
+
+    return true;
 }
 
 void GPUItem::setID()
@@ -399,15 +401,15 @@ void GPUItem::renderData(const DataType& dataType)
         setvBIOS();
         setPLInfo();
 
-        QPixmap iconSet(":/worker/resources/worker/speed.svg");
-        QPainter qpSet = QPainter(&iconSet);
+        QPixmap* iconSet = new QPixmap(":/worker/resources/worker/speed.svg");
+        QPainter qpSet = QPainter(iconSet);
         qpSet.setCompositionMode(QPainter::CompositionMode_SourceIn);
-        qpSet.fillRect(iconSet.rect(), Qt::black);
+        qpSet.fillRect(iconSet->rect(), Qt::black);
         qpSet.end();
 
         QString setStyle = " background-color: transparent; "
                            " color: orange;                 ";
-        ui->lblSetIcon->setPixmap(iconSet);
+        ui->lblSetIcon->setPixmap(*iconSet);
         ui->lblSetIcon->setFixedSize(23,23);
         ui->lblSetIcon->setContentsMargins(0,0,0,0);
         ui->lblSetIcon->setScaledContents(true);
