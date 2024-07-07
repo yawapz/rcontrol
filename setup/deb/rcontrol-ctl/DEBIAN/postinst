@@ -8,6 +8,11 @@ product_dir=rcontrol
 service_name=rcontrolctl
 proxy_service_name=rcontrolproxy
 
+unlink /etc/nginx/sites-enabled/default
+if ! [ -f "/etc/nginx/sites-enabled/rcontrol" ]; then
+    ln -s /etc/nginx/sites-available/rcontrol /etc/nginx/sites-enabled/rcontrol
+fi
+
 #
 # Регистрация systemd-сервиса
 
@@ -71,5 +76,7 @@ systemctl start  ${service_name}.service
 systemctl unmask ${proxy_service_name}.service
 systemctl enable ${proxy_service_name}.service
 systemctl start  ${proxy_service_name}.service
+
+systemctl reload nginx.service
 
 exit 0
