@@ -3,17 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RControl Login</title>
-    
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="icon" href="/src/gpu.png" type="image/x-icon">
+    <title>Login</title>
 </head>
 <body>
-    <div>
-        <input id="loginInput" type="text" name="login" placeholder="login">
-        <br/>
-        <input id="passwordInput" type="password" name="password" placeholder="password">
-        <br/>
-        <button id="login">Авторизация</button>
-        <button id="registration">Регистрация</button>
+    <div class="input-form">
+        <div id="input-form-text">
+            <a id="logo">RControl</a>
+            <a id="auth-text">Авторизация</a> 
+        </div>
+        <div class="input-form-block">
+            <a class="input-form-comment">Логин</a>
+            <input id="loginInput" type="text" name="login" placeholder="Ваш логин">
+            <a class="input-form-comment">Пароль</a>
+            <input id="passwordInput" type="password" name="password" placeholder="Ваш пароль">
+        </div>
+        <div id="btn-block">
+            <button id="login">Вход</button>
+            <button id="registration" class="cover-hidden">Создать</button>
+            <a id="reg" class="regstl">у меня нет учетной записи</a>
+        </div>
+    </div>
+
+    <div class="cover cover-hidden" id="messageBox">
+        <div id="messageBox-popup">
+            <a id="messageBox-text"></a>
+            <button id="messageBox-button" onclick="closeMessageBox()">
+                <img src="./src/close.svg" alt="Закрыть svg" />
+            </button>
+        </div>
     </div>
 
     <script src="/js/login.js"></script>

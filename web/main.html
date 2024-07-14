@@ -3,14 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RControl main</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="icon" href="/src/gpu.png" type="image/x-icon">
+    <title>Main</title>
 </head>
 <body>
-    <div>
-        <button id="refresh">Обновить</button>
-        <button id="settings">Настройки</button>
-        <button id="addWorker">Добавить воркер</button>
-        <button id="logout">Сменить пользователя</button>
+    <div id="top-bar">
+        <div id="top-bar-left">
+            <a id="logo" onclick="addTab()">RControl</a>
+            <button id="refresh"><img id="refreshSvg" src="/src/refresh.svg" alt="Обновить svg" width="20" height="20"></button>
+        </div>
+        <div id="top-bar-right">
+
+            <a id="whoami"></a>
+            <button id="settings" onclick="toggleSettingsPopup()"><img id="settingsSvg" src="/src/settings.svg" alt="Настройки svg" width="20" height="20"></button>
+            <button id="logout"><img id="logOutSvg" src="/src/exit.svg" alt="logout svg" width="20" height="20"></button>
+        </div>
+    </div>
+
+    <div id="worker-list-title">
+        <div id="worker-list-title-name">Name</div>
+        <div id="worker-list-title-status">Status</div>
+        <div id="worker-list-title-uptime">uptime</div>
+        <div id="worker-list-title-speed">Worker speed</div>
+        <div id="worker-list-title-miner">Miner</div>
+        <div id="worker-list-title-gpus"></div>
+        <div id="worker-list-title-la">LA</div>
+        <div id="worker-list-title-fan">FAN</div>
+        <div id="worker-list-title-power">Power</div>
+    </div>
+    <div id="worker-list">
+
+    </div>
+
+    <div id="worker-list-management">
+            <button id="delWorker" onclick="toggleDelSvg()"><img id="delSvg" src="/src/minus.svg" alt="Уд.Воркер svg" width="20" height="20"></button>
+            <button id="addWorker"><img id="addSvg" src="/src/plus.svg" alt="Доб.Воркер svg" width="20" height="20"></button>
+    </div>
+
+    <div class="cover cover-hidden" id="settings-form">
+        <div id="settings-popup">
+            <div id="settings-header-div">
+                <a id="settings-header">Настройки</a>
+                <a id="settings-login"></a>
+            </div>
+            <div id="change-password-field">
+                <input id="new-password-input" type="password" name="password" placeholder="Новый пароль">
+                <button id="changse-password">Изменить пароль</button>
+            </div>
+
+            <button id="delete-user">Удалить пользователя</button>
+
+            <button id="settings-form-close" onclick="toggleSettingsPopup()">
+                <img src="./src/close.svg" alt="Закрыть svg" />
+            </button>
+        </div>
+
+    </div>
+
+    <div class="cover cover-hidden" id="messageBox">
+        <div id="messageBox-popup">
+            <a id="messageBox-text"></a>
+            <button id="messageBox-button" onclick="closeMessageBox()">
+                <img src="./src/close.svg" alt="Закрыть svg" />
+            </button>
+        </div>
+    </div>
+
+    <div class="cover cover-hidden" id="dialog">
+        <div id="dialog-popup">
+            <a id="dialog-text"></a>
+            <div id="dialog-button-div">
+                <button id="dialog-yes">Да</button>
+                <button id="dialog-no" onclick="closeDialog()">Нет</button>
+            </div>
+            <button id="dialog-button" onclick="closeDialog()">
+                <img src="./src/close.svg" alt="Закрыть svg" />
+            </button>
+        </div>
     </div>
 
     <script src="/js/main.js"></script>

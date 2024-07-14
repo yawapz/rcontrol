@@ -1,5 +1,44 @@
+'use strict';
 const loginBtn = document.getElementById("login");
 const registrationBtn = document.getElementById("registration");
+const reg = document.getElementById('reg');
+let regState = false;
+
+function showMessageBox(text)
+{
+    let msg = document.getElementById('messageBox-text');
+    msg.innerHTML = text;
+    messageBox.classList.remove("cover-hidden");
+}
+
+function closeMessageBox()
+{
+    let msg = document.getElementById('messageBox-text');
+    msg.innerHTML = '';
+    const messageBox = document.getElementById("messageBox");
+    messageBox.classList.add("cover-hidden");
+}
+
+reg.onclick = () =>
+{
+    const auth = document.getElementById('auth-text');
+    if (!regState)
+    {
+        auth.innerHTML = 'Регистрация';
+        loginBtn.classList.add('cover-hidden');
+        registrationBtn.classList.remove('cover-hidden');
+        reg.classList.add('reg-active');
+        regState = true;
+    }
+    else
+    {
+        auth.innerHTML = 'Авторизация';
+        loginBtn.classList.remove('cover-hidden');
+        registrationBtn.classList.add('cover-hidden');
+        reg.classList.remove('reg-active');
+        regState = false;
+    }
+}
 
 function uuidv4() 
 {
@@ -63,7 +102,7 @@ loginBtn.onclick = () =>
         }
         else
         {
-            alert("Ошибка авторизации");
+            showMessageBox("Ошибка авторизации");
         }
     };
 };
@@ -113,11 +152,12 @@ registrationBtn.onclick = () =>
         
         if (resault === 'true')
         {
-            alert(`Пользователь ${data.content.login} успешно зарегестрирован`);
+            showMessageBox(`Пользователь ${data.content.login} успешно зарегестрирован`);
+            reg.click();
         }
         else
         {
-            alert(`Пользователь с именем ${data.content.login} уже существует`);
+            showMessageBox(`Пользователь с именем ${data.content.login} уже существует`);
         }
     };
 };

@@ -410,6 +410,8 @@ struct workerData
         J_SERIALIZE_ITEM(totalStaleShares1)
         J_SERIALIZE_ITEM(totalStaleShares2)
         J_SERIALIZE_ITEM(totalStaleSharesZil)
+        J_SERIALIZE_ITEM(lastOnline)
+        J_SERIALIZE_ITEM(status)
     J_SERIALIZE_END
 };
 
