@@ -1,4 +1,5 @@
 'use strict';
+
 let deleteState = false;
 
 const refresh = document.getElementById("refresh");
@@ -71,8 +72,7 @@ function workerShow(event)
 
 refresh.onclick = () => 
 {
-    const ws = new WebSocket("ws://localhost:9000");
-
+    const ws = new WebSocket(`ws://${location.hostname}:9000`);
     ws.onopen = () => 
     {
         const message = 
@@ -326,8 +326,7 @@ refresh.onclick = () =>
 
 addWorker.onclick = () => 
 {
-    const ws = new WebSocket("ws://localhost:9000");
-
+    const ws = new WebSocket(`ws://${location.hostname}:9000`);
     ws.onopen = () => 
     {
         const message = 
@@ -382,8 +381,7 @@ function toggleSettingsPopup()
 
 function deleteWorker(event)
 {
-    const ws = new WebSocket("ws://localhost:9000");
-
+    const ws = new WebSocket(`ws://${location.hostname}:9000`);
     ws.onopen = () => 
     {
         const message = 
@@ -511,9 +509,8 @@ function toggleDelSvg()
 
 changePassword.onclick = () => 
 {
-    const ws = new WebSocket("ws://localhost:9000");
+    const ws = new WebSocket(`ws://${location.hostname}:9000`);
     const newPassword = document.getElementById('new-password-input');
-
     ws.onopen = () => 
     {
         const message = 
@@ -563,7 +560,7 @@ changePassword.onclick = () =>
 
 function deleteUserActivete()
 {
-    const ws = new WebSocket("ws://localhost:9000");
+    const ws = new WebSocket(`ws://${location.hostname}:9000`);
     ws.onopen = () => 
     {
         const message = 

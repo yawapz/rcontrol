@@ -58,8 +58,7 @@ loginBtn.onclick = () =>
     const passwordInput = document.getElementById('passwordInput');
     let resultText = "";
 
-    const ws = new WebSocket("ws://localhost:9000");
-
+    const ws = new WebSocket(`ws://${location.hostname}:9000`);
     ws.onopen = () => 
     {
         const message = 
@@ -113,8 +112,7 @@ registrationBtn.onclick = () =>
     const passwordInput = document.getElementById('passwordInput');
     let resultText = "";
 
-    const ws = new WebSocket("ws://localhost:9000");
-
+    const ws = new WebSocket(`ws://${location.hostname}:9000`);
     ws.onopen = () => 
     {
         const message = 

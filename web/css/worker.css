@@ -1,0 +1,276 @@
+#workerInfo, #footer-block
+{
+    width: 95%;
+    height: 50px;
+    max-width: 1280px;
+    background:linear-gradient(45deg,white, #38d9a9);
+    border-radius: 5px;
+
+    margin: 5px auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    text-shadow: 1px 1px 1px #787878;
+    font-size: 20px;
+    font-weight: 500;
+    color: black;
+
+    white-space: nowrap;
+}
+
+#workerInfo-left
+{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: 0 auto;
+    justify-content: left;
+    align-items: center;
+    text-align: left;
+    gap: 5px;
+}
+
+#workerInfo-right
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    align-items: end;
+    text-align: right;
+}
+
+#workerName
+{
+    color: #38d9a9;
+}
+
+#minerUpTime
+{
+    margin-left: 20px;
+    color: #818E9C;
+}
+
+.online-text
+{
+    color: greenyellow;
+    margin: 0 10px;
+    font-size: 17px;
+    font-weight: 500;
+    width: 10%;
+}
+
+.offline-text
+{
+    color: #a80000;
+    margin: 0 10px;
+    font-size: 17px;
+    font-weight: 500;
+    width: 10%;
+}
+
+#workerInfo-workerLA
+{
+    margin-right: 50px;
+}
+
+.workerLA-value
+{
+    font-size: 22px;
+    font-weight: 500;
+    color: #818E9C;
+}
+
+.workerLA-text
+{
+    font-size: 14px;
+    vertical-align: top;
+}
+
+#workerInfo-power
+{
+    margin-right: 10px;
+}
+
+.cover-hidden
+{
+    display: none;
+}
+
+#footer
+{
+    width: 100%;
+    background: none;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+#footer-block
+{
+    display: flex;
+    flex-direction: row;
+    background:linear-gradient(45deg, #38d9a9, white);
+    justify-content: space-between;
+}
+
+#cpu
+{
+    margin-left: 5px;
+}
+
+#system
+{
+    margin-right: 5px;
+}
+
+#cpu-div, #system-div
+{
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+}
+
+#cpu-div-text, #system-div-text
+{
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: start;
+    margin-left: 10px;
+}
+
+.footer-div-text
+{
+    display: flex;
+    flex-direction: column;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.footer-value-text
+{
+    margin-left: 5px;
+    font-size: 13px;
+    align-items: start;
+    font-weight: 500;
+}
+
+#cpu-div-text-model, #cpu-div-text-temp, #cpu-div-text-motherboard,
+#system-div-text-kernel, #system-div-text-nvidia, #system-div-text-amd
+{
+    display: flex;
+    flex-direction: row;
+}
+
+#disk, #ram, #network
+{
+    display: flex;
+    flex-direction: column;
+}
+
+#disk-model, #disk-size, #disk-space, #ram-total, #ram-used, #ram-free,
+#remoteIP, #localIP, #mac
+{
+    display: flex;
+    flex-direction: row;
+}
+
+#remoteIPSvg, #localIPSvg
+{
+    cursor: pointer;
+    margin: 0 auto;
+}
+
+#powerSvg
+{
+    transform:translateX(7px);
+}
+
+.workerElement
+{
+    display: flex;
+    flex-direction: row;
+    width: 95%;
+    max-width: 1270px;
+    height: 40px;
+    margin: 5px auto;
+    padding: 5px;
+    font-size: 16px;
+    text-shadow: 1px 1px 1px #787878;
+    border: black solid 1px;
+    border-radius: 5px;
+    align-items: center;
+    justify-content: space-between;
+    
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    white-space: nowrap;
+}
+
+.workerElement-gpuInfoDivTopDiv, .workerElement-gpuInfoDivBottomDiv
+{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+    justify-content: left;
+}
+
+.gpuID, .gpuName
+{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.gpuName
+{
+    color:  yellowgreen;
+}
+
+.workerElement-rightBlock
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    align-items: center;
+    gap: 10px;
+}
+
+.speedSvgDiv
+{
+    cursor: pointer;
+    margin: 5px;
+    align-items: center;
+    justify-items: center;
+    display: flex;
+    flex-direction: row;
+}
+
+.PLDiv, .fanDiv
+{
+    gap: 7px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.PLValueDiv, .coreDiv, .fanValueDiv
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+}

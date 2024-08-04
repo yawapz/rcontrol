@@ -8,7 +8,117 @@
     <title>Worker</title>
 </head>
 <body>
-    <a id="workerId"></a>
+    <div id="workerInfo">
+        <div id="workerInfo-left">
+            <a id="workerName"></a>
+            <a id="workerStatus"></a>
+            <a id="workerUpTime"></a>
+            <a id="minerUpTime"></a>
+        </div>
+        <div id="workerInfo-right">
+            <div id="workerInfo-workerLA">
+                <a>Load Average</a>
+                <a class="workerLA-text">1min</a>
+                <a id="workerLA-value1" class="workerLA-value"></a>
+                <a class="workerLA-text">5min</a>
+                <a id="workerLA-value5" class="workerLA-value"></a>
+                <a class="workerLA-text">15min</a>
+                <a id="workerLA-value15" class="workerLA-value"></a>
+            </div>
+            <div id="workerInfo-power">
+                <img id="powerSvg" src="/src/consumption.svg" alt="power svg" width="20" height="20">
+                <a id="workerInfo-power-value"></a>
+            </div>
+        </div>
+    </div>
+    <div id="gpuList">
+
+    </div>
+    <div id="footer">
+        <div id="footer-block">
+            <div id="cpu">
+                <div id="cpu-div">
+                   <img id="cpuSvg" src="/src/cpu.svg" alt="cpu svg" width="40" height="40">
+                   <div id="cpu-div-text">
+                        <div id="cpu-div-text-model">
+                            <a class="footer-div-text">CPU</a>
+                            <a id="cpu-div-text-model-value" class="footer-value-text"></a>
+                        </div>
+                        <div id="cpu-div-text-temp">
+                            <a class="footer-div-text">CPU TEMP</a>
+                            <a id="cpu-div-text-temp-value" class="footer-value-text"></a>
+                        </div>
+                        <div id="cpu-div-text-motherboard">
+                            <a class="footer-div-text">Motherboard</a>
+                            <a id="cpu-div-text-motherboard-value" class="footer-value-text"></a>
+                        </div>
+                   </div>     
+                </div>
+            </div>
+            <div id="disk">
+                <div id="disk-model">
+                    <a class="footer-div-text">Disk Model</a>
+                    <a id="disk-model-value" class="footer-value-text"></a>
+                </div>
+                <div id="disk-size">
+                    <a class="footer-div-text">Disk Size</a>
+                    <a id="disk-size-value" class="footer-value-text"></a>
+                </div>
+                <div id="disk-space">
+                    <a class="footer-div-text">Free Space</a>
+                    <a id="disk-space-value" class="footer-value-text"></a>
+                </div>
+            </div>
+            <div id="ram">
+                <div id="ram-total">
+                    <a class="footer-div-text">RAM Total</a>
+                    <a id="ram-total-value" class="footer-value-text"></a>
+                </div>
+                <div id="ram-used">
+                    <a class="footer-div-text">RAM Used</a>
+                    <a id="ram-used-value" class="footer-value-text"></a>
+                </div>
+                <div id="ram-free">
+                    <a class="footer-div-text">RAM Free</a>
+                    <a id="ram-free-value" class="footer-value-text"></a>
+                </div>
+            </div>
+            <div id="network">
+                <div id="remoteIP">
+                    <a class="footer-div-text">Remote IP</a>
+                    <a id="remoteIP-value" class="footer-value-text"></a>
+                    <img id="remoteIPSvg" src="/src/copy.svg" alt="copy svg" width="12" height="12">
+                </div>
+                <div id="localIP">
+                    <a class="footer-div-text">Local IP</a>
+                    <a id="localIP-value" class="footer-value-text"></a>
+                    <img id="localIPSvg" src="/src/copy.svg" alt="copy svg" width="12" height="12">
+                </div>
+                <div id="mac">
+                    <a class="footer-div-text">MAC Address</a>
+                    <a id="mac-value" class="footer-value-text"></a>
+                </div>
+            </div>
+            <div id="system">
+                <div id="system-div">
+                   <img id="linuxSvg" src="/src/linux.svg" alt="linux svg" width="40" height="40">
+                   <div id="system-div-text">
+                        <div id="system-div-text-kernel">
+                            <a class="footer-div-text">Kernel</a>
+                            <a id="system-div-text-kernel-value" class="footer-value-text"></a>
+                        </div>
+                        <div id="system-div-text-nvidia">
+                            <a class="footer-div-text">NVIDIA</a>
+                            <a id="system-div-text-nvidia-value" class="footer-value-text"></a>
+                        </div>
+                        <div id="system-div-text-amd">
+                            <a class="footer-div-text">AMD</a>
+                            <a id="system-div-text-amd-value" class="footer-value-text"></a>
+                        </div>
+                   </div>
+            </div>
+        </div>
+    </div>
 </body>
 <script src="/js/worker.js"></script>
 </html>

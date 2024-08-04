@@ -20,19 +20,20 @@ mkdir -p $package_dir/var/opt/$product_dir/proxy
 mkdir -p $package_dir/etc/nginx/sites-available
 mkdir -p $package_dir/opt/$product_dir/bin
 mkdir -p $package_dir/var/www/$product_dir
+mkdir -p $package_dir/var/opt/$product_dir/log
 
 
 cp $script_dir/setup/deb/$package_ctl/DEBIAN/*     $package_dir/DEBIAN
 cp $script_dir/config/rcontrolctl.conf             $package_dir/etc/$product_dir
 cp $script_dir/config/rcontrolctl.logger.conf      $package_dir/etc/$product_dir
 
-cp    $build_dir/bin/rcontrolctl                   $package_dir/opt/$product_dir/bin
-cp -r $script_dir/proxy/                           $package_dir/var/opt/$product_dir
-cp    $script_dir/setup/run-proxy                  $package_dir/var/opt/$product_dir/proxy
-cp    $script_dir/systemd/rcontrolctl.service      $package_dir/etc/systemd/system
-cp    $script_dir/systemd/rcontrolproxy.service    $package_dir/etc/systemd/system
-cp -r $script_dir/web/*                            $package_dir/var/www/$product_dir
-cp    $script_dir/web/nginx/rcontrol               $package_dir/etc/nginx/sites-available/rcontrol
+cp     $build_dir/bin/rcontrolctl                   $package_dir/opt/$product_dir/bin
+cp -rf $script_dir/proxy/                           $package_dir/var/opt/$product_dir
+cp     $script_dir/setup/run-proxy                  $package_dir/var/opt/$product_dir/proxy
+cp     $script_dir/systemd/rcontrolctl.service      $package_dir/etc/systemd/system
+cp     $script_dir/systemd/rcontrolproxy.service    $package_dir/etc/systemd/system
+cp -rf $script_dir/web/*                            $package_dir/var/www/$product_dir
+cp     $script_dir/web/nginx/rcontrol               $package_dir/etc/nginx/sites-available/rcontrol
 
 rm     $package_dir/var/opt/$product_dir/proxy/.git
 rm -rf $package_dir/var/www/$product_dir/nginx
@@ -44,6 +45,7 @@ chmod    u=rw,go=r   $package_dir/DEBIAN/conffiles
 chmod    u=rwX,go=rX $package_dir/etc/$product_dir
 chmod -R u=rwX,go=rX $package_dir/opt/$product_dir
 chmod -R u=rwX,go=rX $package_dir/var/opt/$product_dir/proxy
+chmod -R u=rwX,go=rX $package_dir/var/opt/$product_dir/log
 chmod    u=rwx,go=rx $package_dir/opt/$product_dir/bin/rcontrolctl
 
 # Права на директорию /var/opt/$product_dir назначаются в пакете $package_base,
@@ -61,7 +63,7 @@ installed_size=$(du -s $package_dir | sed -r 's/([0-9]+).*/\1/')
 echo "installed_size: $installed_size"
 
 package_depends=$(cat <<-EOS
-	libc6, systemd, libpq5, libqt5core5a, libqt5network5, libqt5sql5, nginx
+	libc6, systemd, libpq5, libqt5core5a, libqt5network5, libqt5sql5, nginx, npm, postgresql
 EOS
 )
 

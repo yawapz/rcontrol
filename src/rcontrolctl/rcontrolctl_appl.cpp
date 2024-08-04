@@ -54,7 +54,7 @@ bool Application::init()
     }
 
     config::base().getValue("application.name", _applName);
-    config::base().getValue("application.line", _applIndex);
+    //config::base().getValue("application.line", _applIndex);
     if (!config::base().getValue("database.users_table", _usersTable))
         config::base().setValue("database.users_table", _usersTable);
     if (!config::base().getValue("database.workers_table", _workersTable))
@@ -489,18 +489,19 @@ bool Application::checkSQLTables()
                                        " local_ip text,                          "
                                        " ext_ip text,                            "
                                        " last_online timestamp without time zone,"
-                                       " PRIMARY KEY (id))                       ";
+                                       " PRIMARY KEY (id));                      ";
         if (!createTable(_gpusTable, sqlCreateWorkerTable))
             return false;
     }
     if (!check(_usersTable))
     {
-        QString sqlCreateUsersTable = "CREATE TABLE public.users(    "
-                    "id uuid NOT NULL,                               "
-                    "login text NOT NULL,                            "
-                    "password text NOT NULL,                         "
-                    "last_visit timestamp without time zone NOT NULL,"
-                    "PRIMARY KEY (id));                              ";
+        QString sqlCreateUsersTable =
+                "CREATE TABLE public.users(                      "
+                "id uuid NOT NULL,                               "
+                "login text NOT NULL,                            "
+                "password text NOT NULL,                         "
+                "last_visit timestamp without time zone NOT NULL,"
+                "PRIMARY KEY (id));                              ";
         if (!createTable(_gpusTable, sqlCreateUsersTable))
             return false;
     }

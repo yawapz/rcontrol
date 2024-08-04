@@ -100,12 +100,13 @@ bool Application::init()
     _hostPoint.setAddress(host);
     _hostPoint.setPort(port);
 
-    if (!_socket.init({QHostAddress::AnyIPv4, port}))
+    if (!_socket.init({host, port}))
     {
         log_error << "Socket can't be initialized";
         return false;
     }
 
+    _socket.setEchoTimeout(5);
     connectToHost();
 
     if (!_socket.isConnected())
@@ -339,12 +340,12 @@ QString Application::linuxTerminalRequest(const QString &request)
 
 void Application::connectToHost()
 {
-    _socket.start();
+    _socket.connect();
 
-    int cnt = 3;
+    int cnt = 30;
     while (cnt--)
     {
-        usleep(50*1000);
+        usleep(200*1000);
         if (_socket.isConnected())
             break;
     }

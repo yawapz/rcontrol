@@ -24,6 +24,7 @@ sed -e "s/%TARGET_USER%/$SUDO_USER/" \
 #     -i /etc/systemd/system/$service_name
 
 need_reboot=
+group_name=rcontrol
 
 #
 # Создание пользовательских групп
@@ -35,37 +36,39 @@ if [ -z "$res" ]; then
     echo "The group $group_name is created"
 fi
 
-res=$(groups $SUDO_USER | grep "$group_name")
-if [ -z "$res" ]; then
-    usermod -aG $group_name $SUDO_USER
-    need_reboot=yes
+if ! [ $(whoami) = "root" ]; then
+	res=$(groups $SUDO_USER | grep "$group_name")
+	if [ -z "$res" ]; then
+	    usermod -aG $group_name $SUDO_USER
+	    need_reboot=yes
+	fi
+
+	if [ "$need_reboot" = "yes" ]; then
+	    echo "====================================================== "
+	    echo "! The user $SUDO_USER added to groups: ${group_name}.  "
+	    echo "! Need relogin user and repeat installation.           "
+	    echo "====================================================== "
+	    exit 1
+	fi
+
+	#
+	# Назначение прав на рабочие директории
+	#
+	chown -R root:$group_name  /etc/$product_dir
+	chmod -R ug=rwX,o=rX       /etc/$product_dir
+
+	chown -R root:$group_name  /var/opt/$product_dir
+	chmod -R ug=rwX,o=rX       /var/opt/$product_dir
+
+	#
+	# Назначение прав на рабочие директории
+	#
+	chown -R root:$group_name  /etc/$product_dir
+	chmod -R ug=rwX,o=rX       /etc/$product_dir
+
+	chown -R root:$group_name  /var/opt/$product_dir
+	chmod -R ug=rwX,o=rX       /var/opt/$product_dir
 fi
-
-if [ "$need_reboot" = "yes" ]; then
-    echo "====================================================== "
-    echo "! The user $SUDO_USER added to groups: ${group_name}.  "
-    echo "! Need relogin user and repeat installation.           "
-    echo "====================================================== "
-    exit 1
-fi
-
-#
-# Назначение прав на рабочие директории
-#
-chown -R root:$group_name  /etc/$product_dir
-chmod -R ug=rwX,o=rX       /etc/$product_dir
-
-chown -R root:$group_name  /var/opt/$product_dir
-chmod -R ug=rwX,o=rX       /var/opt/$product_dir
-
-#
-# Назначение прав на рабочие директории
-#
-chown -R root:$group_name  /etc/$product_dir
-chmod -R ug=rwX,o=rX       /etc/$product_dir
-
-chown -R root:$group_name  /var/opt/$product_dir
-chmod -R ug=rwX,o=rX       /var/opt/$product_dir
 
 systemctl daemon-reload
 
