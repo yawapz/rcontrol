@@ -47,7 +47,7 @@ installed_size=$(du -s $package_dir | sed -r 's/([0-9]+).*/\1/')
 echo "installed_size: $installed_size"
 
 package_depends=$(cat <<-EOS
-	libc6, libqt5core5a, libqt5network5
+	libc6, libqt5core5a, libqt5network5, curl
 EOS
 )
 

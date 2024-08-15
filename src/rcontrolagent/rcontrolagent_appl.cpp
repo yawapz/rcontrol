@@ -1224,14 +1224,27 @@ void Application::acceptGPUSettings(const data::gpuData& GPU)
     linuxTerminalRequest(setPowerLimit);
 
     // FAN Speed
-    const QString setFunSpeed =
-            QString(" nvidia-settings -c :%1 -a          "
-                    " '[gpu:%1]/GPUFanControlState=1' -a "
-                    " '[fan:0]/GPUTargetFanSpeed='%2 -a  "
-                    " '[fan:1]/GPUTargetFanSpeed=%2'     ")
+    const QString setControlSpeed = QString(" nvidia-settings "
+                                            "'[gpu:%1]/GPUFanControlState=1' ")
+                                                                .arg(GPU.gpuId);
+    const QString setFunSpeed1 =
+            QString(" nvidia-settings -c :%1 -a '[fan:0]/GPUTargetFanSpeed='%2 ")
                     .arg(QString::number(GPU.gpuId),
                          QString::number(GPU.setFanSpeed));
-    linuxTerminalRequest(setFunSpeed);
+    const QString setFunSpeed2 =
+            QString(" nvidia-settings -c :%1 -a '[fan:1]/GPUTargetFanSpeed='%2 ")
+                    .arg(QString::number(GPU.gpuId),
+                         QString::number(GPU.setFanSpeed));
+
+//    " nvidia-settings -c :%1 -a          "
+//    " '[gpu:%1]/GPUFanControlState=1' -a "
+//    " '[fan:0]/GPUTargetFanSpeed='%2 -a  "
+//    " '[fan:1]/GPUTargetFanSpeed=%2'     "
+
+
+    linuxTerminalRequest(setControlSpeed);
+    linuxTerminalRequest(setFunSpeed1);
+    linuxTerminalRequest(setFunSpeed2);
 }
 
 void Application::setDefaultGPUSettings(const data::gpuData& GPU)

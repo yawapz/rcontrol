@@ -28,6 +28,35 @@ function uuidv4()
     );
 }
 
+function normalaizeSpeed(speed)
+{
+    let transformSpeed = speed;
+    let value;
+
+    if(speed >= 1000 && speed < 1000000)
+    {
+        transformSpeed /= 1000;
+        value = "KH";
+    }
+    else if(speed >= 100000 && speed < 1000000000)
+    {
+        transformSpeed /= 1000000;
+        value = "MH";
+    }
+    else if(speed >= 100000000 && speed < 1000000000000)
+    {
+        transformSpeed /= 1000000000;
+        value = "GH";
+    }
+    else
+        value = "H";
+
+    if (transformSpeed)
+        return String(`${transformSpeed.toFixed(1)} ${value}`);
+    else 
+        return '-/-'; 
+}
+
 function addTab()
 {
     window.open("./main.html");
@@ -105,6 +134,7 @@ refresh.onclick = () =>
         const data = JSON.parse(message.data);
         ws.close();
         localStorage.setItem('userData', JSON.stringify(data.content, null, 4));
+        localStorage.setItem('lastDataUpdate', (new Date()).valueOf());
         let divList = document.getElementById("worker-list");
         divList.innerHTML = '';
 
@@ -194,36 +224,6 @@ refresh.onclick = () =>
             }
             else
                 elemUptime.appendChild(document.createTextNode(worker.status ? minerUptimeText : (lastOnlineText)));
-
-            function normalaizeSpeed(speed)
-            {
-                let transformSpeed = speed;
-                let value;
-
-                if(speed >= 1000 && speed < 1000000)
-                {
-                    transformSpeed /= 1000;
-                    value = "KH";
-                }
-                else if(speed >= 100000 && speed < 1000000000)
-                {
-                    transformSpeed /= 1000000;
-                    value = "MH";
-                }
-                else if(speed >= 100000000 && speed < 1000000000000)
-                {
-                    transformSpeed /= 1000000000;
-                    value = "GH";
-                }
-                else
-                    value = "H";
-
-                if (transformSpeed)
-                    return String(`${transformSpeed.toFixed(1)} ${value}`);
-                else 
-                    return '-/-'; 
-                
-            }
 
             let speed1 = 0;
             let speed2 = 0;

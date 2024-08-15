@@ -1,4 +1,4 @@
-#workerInfo, #footer-block
+#workerInfo, #footer-block, #workerMinerStat
 {
     width: 95%;
     height: 50px;
@@ -23,6 +23,12 @@
     color: black;
 
     white-space: nowrap;
+}
+
+#workerMinerStat
+{
+    background: transparent;
+    margin: 25px auto;
 }
 
 #workerInfo-left
@@ -258,7 +264,7 @@
     flex-direction: row;
 }
 
-.PLDiv, .fanDiv
+.PLDiv, .fanDiv, .tempDiv
 {
     gap: 7px;
     display: flex;
@@ -267,10 +273,69 @@
     justify-content: center;
 }
 
-.PLValueDiv, .coreDiv, .fanValueDiv
+.PLValueDiv, .coreDiv, .fanValueDiv, .tempValueDiv, .speedDiv
 {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: start;
     justify-items: center;
+    /* text-align: right; */
+}
+
+.workerElement-gpuStatDiv
+{
+    display: flex;
+    flex-direction: row;
+    margin: 0 5px;
+    width: 100%;
+    align-items: start;
+    justify-items: center;
+    justify-content: left;
+}
+
+.A, .S, .R, .I
+{
+    margin: 7px;
+}
+
+.A
+{
+    margin-left: 5%;
+    color: black;
+}
+
+.S
+{
+    color: yellowgreen;
+}
+
+.R, .I
+{
+    color: #a80000;
+}
+
+#totalAcceptedShares
+{
+    margin: 0;
+}
+
+#workerMinerStat-leftBlock, #workerMinerStat-rightBlock
+{
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    justify-content: space-between;
+}
+
+#workerMinerStat-leftBlock-stat
+{
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center;
+    justify-content: center;
+    align-content: center;
+    text-align: center; */
 }

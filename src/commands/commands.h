@@ -216,6 +216,8 @@ struct gpuData
         J_SERIALIZE_ITEM(rejectedSharesZil)
         J_SERIALIZE_ITEM(rejectedShares1)
         J_SERIALIZE_ITEM(rejectedShares2)
+        J_SERIALIZE_ITEM(staleShares1)
+        J_SERIALIZE_ITEM(staleShares2)
         J_SERIALIZE_ITEM(staleSharesZil)
         J_SERIALIZE_ITEM(invalidShares1)
         J_SERIALIZE_ITEM(invalidShares2)
