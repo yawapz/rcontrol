@@ -213,7 +213,8 @@
     padding: 5px;
     font-size: 16px;
     text-shadow: 1px 1px 1px #787878;
-    border: black solid 1px;
+    background: #c8dad5;
+    border: #676b6a solid 1px;
     border-radius: 5px;
     align-items: center;
     justify-content: space-between;
@@ -319,13 +320,22 @@
     margin: 0;
 }
 
-#workerMinerStat-leftBlock, #workerMinerStat-rightBlock
+#workerMinerStat-leftBlock
 {
     width: 50%;
     display: flex;
     flex-direction: row;
     gap: 15px;
     justify-content: space-between;
+}
+
+#workerMinerStat-rightBlock
+{
+    display: flex;
+    flex-direction: row;
+    margin-left: 10px;
+    width: 50%;
+    gap: 2px;
 }
 
 #workerMinerStat-leftBlock-stat
@@ -338,4 +348,68 @@
     justify-content: center;
     align-content: center;
     text-align: center; */
+}
+
+.gpu-widget-item, .gpu-widget-item-small
+{
+    font-size: 14px;
+    font-weight: 400;
+    text-shadow: 1px 1px 1px #787878;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #676b6a;
+    border-radius: 3px;
+    align-content: start;
+    align-items: center;
+    width: 47px;
+    height: 65px;
+    justify-content: space-between;
+    background: #c8dad5;
+}
+
+.gpu-widget-item-fan-red
+{
+    background-color: #a80000;
+    color: white;
+    width: 95%;
+    border-radius: 3px;
+    margin: 0 0 2px 0;
+    text-align: center;
+}
+
+.gpu-widget-item-fan-yellow
+{
+    background-color: rgb(255, 255, 0);
+    color: black;
+    width: 95%;
+    border-radius: 3px;
+    margin: 0 0 2px 0;
+    text-align: center;
+}
+
+.gpu-widget-item-fan-blue
+{
+    background-color: #2392dc;
+    color: white;
+    width: 95%;
+    border-radius: 3px;
+    margin: 0 0 2px 0;
+    text-align: center;
+}
+
+.gpu-widget-item-fan-purp
+{
+    background-color: #5c6bc0;
+    color: white;
+    width: 95%;
+    border-radius: 3px;
+    margin: 0 0 2px 0;
+    text-align: center;
+}
+
+.gpu-widget-item-speed
+{
+    flex: 1;
+    align-content: center;
+    font-size: 12px;
 }

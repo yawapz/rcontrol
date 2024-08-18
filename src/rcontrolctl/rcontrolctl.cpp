@@ -55,8 +55,6 @@ void stopProgram()
             THREAD_FUNC.terminate(); \
         }
 
-    //video::transport::tcp::sendPool().deinit();
-
     STOP_THREAD(udp::socket()        , "TransportUDP"       , 15)
     STOP_THREAD(wdc::wdc()           , "WorkerDataControl"  , 15)
 

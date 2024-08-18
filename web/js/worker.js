@@ -220,6 +220,8 @@ function load()
         // Создание виджетов GPU
         const gpuList = document.getElementById('gpuList');
         gpuList.innerHTML = '';
+        const gpuWidgetList = document.getElementById('workerMinerStat-rightBlock');
+        gpuWidgetList.innerHTML = '';
 
         let totalSpeed1 = 0;
         let totalSpeed2 = 0;
@@ -323,7 +325,7 @@ function load()
             const fanValueDiv = document.createElement('div');
             fanValueDiv.classList.add('fanValueDiv');
             const fanValueTop = document.createElement('a');
-            fanValueTop.innerHTML = `${Number(device.fanSpeed)} %`;
+            fanValueTop.innerHTML = device.fanSpeed ? `${Number(device.fanSpeed)} %` : ' 0%';
             const fanValueBottom = document.createElement('a');
             fanValueBottom.innerHTML = `${Number(device.setFanSpeed)} %`;
 
@@ -394,6 +396,53 @@ function load()
             workerElement.appendChild(gpuStatDiv);
             workerElement.appendChild(rightBlock);
             gpuList.appendChild(workerElement);
+
+            // GPU WIDGET ITEM
+            if (worker.status)
+            {
+                const rect = document.createElement('div');
+                const wTemp = document.createElement('a');
+                wTemp.innerHTML = `${Number(device.coreTemp)}°`;
+                const wFanSpeed = document.createElement('a');
+                wFanSpeed.innerHTML = `${Number(device.fanSpeed)}%`;
+
+                if (Number(device.fanSpeed) > 80)
+                    wFanSpeed.classList.add("gpu-widget-item-fan-red");
+                else if (Number(device.fanSpeed) > 65 && Number(device.fanSpeed) <= 80)
+                    wFanSpeed.classList.add("gpu-widget-item-fan-yellow");
+                else if (Number(device.fanSpeed) > 35 && Number(device.fanSpeed) <= 65)
+                    wFanSpeed.classList.add("gpu-widget-item-fan-blue");
+                else if (Number(device.fanSpeed) >= 0 && Number(device.fanSpeed) <= 35)
+                    wFanSpeed.classList.add("gpu-widget-item-fan-purp");
+
+                const wSpeed1 = document.createElement('a');
+                wSpeed1.innerHTML = worker.algorithm1 ? `${speed1}` : "-/-";
+                // if (device.speed1 == 0)
+                //     wSpeed1.innerHTML = 'n/a';
+                    
+                const wSpeed2 = document.createElement('a');
+                wSpeed2.innerHTML = worker.algorithm2 ? `${speed2}` : "";
+                if (device.speed2 == 0 && device.speedZil > 0)
+                    wSpeed2.innerHTML = speedZil;
+
+                if (wSpeed2.innerHTML != "")
+                {
+                    wSpeed1.classList.add("gpu-widget-item-speed");
+                    wSpeed2.classList.add("gpu-widget-item-speed");
+                    rect.classList.add("gpu-widget-item");
+                }
+                else
+                {
+                    wSpeed1.classList.add("gpu-widget-item-speed");
+                    rect.classList.add("gpu-widget-item");
+                }
+
+                rect.appendChild(wTemp);
+                rect.appendChild(wFanSpeed);
+                rect.appendChild(wSpeed1);
+                rect.appendChild(wSpeed2);
+                gpuWidgetList.appendChild(rect);
+            }
         } // for device
 
         const minerName = document.getElementById('minerName');
